@@ -12,6 +12,7 @@ namespace Session2_MVC
 
             if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 
+            #region Routing
             app.UseRouting();
 
             app.MapGet("/", async context =>
@@ -40,10 +41,14 @@ namespace Session2_MVC
             });
 
             app.MapControllerRoute("default",
-                "{controller}/{action}/{id?}",
-                defaults: new { Controller = "Movies", Action = "Index" });
+                "{controller}/{action}/{id?}"
+                //defaults: new { Controller = "Movies", Action = "Index" }
+                );
 
             app.MapControllerRoute("omarRoute", "{controller = Movies}/{action = GetMovie }/{id}");
+
+            #endregion
+
 
 
             app.Run();
