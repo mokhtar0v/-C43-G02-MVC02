@@ -22,10 +22,10 @@ namespace Session2_MVC
                 "{controller=Home}/{action=Index}/{id?}"
             );
 
-            app.MapControllerRoute(
-                "omarRoute",
-                "{controller=Movies}/{action=GetMovie}/{id?}"
-            );
+            //app.MapControllerRoute(
+            //    "omarRoute",
+            //    "{controller=Account}/{action}/{id?}"
+            //);
 
             #endregion
 
