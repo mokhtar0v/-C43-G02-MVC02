@@ -10,26 +10,27 @@ namespace Session2_MVC
 
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (app.Environment.IsDevelopment())
+                app.UseDeveloperExceptionPage();
 
             #region Routing
-            app.UseRouting();
-            app.Use(async (context, next) =>
-            {
-                Console.WriteLine($"Request: {context.Request.Path}");
-                await next();
-            });
-            app.UseStaticFiles();
-            app.MapControllerRoute("default",
-                "{controller = Home}/{action = Index}/{id?}"
-                //defaults: new { Controller = "Movies", Action = "Index" }
-                );
 
-            app.MapControllerRoute("omarRoute", "{controller = Movies}/{action = GetMovie }/{id}");
+            app.UseRouting();
+            app.UseStaticFiles();
+
+            // Corrected Default Route
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
+
+            // Corrected Custom Route
+            app.MapControllerRoute(
+                name: "omarRoute",
+                pattern: "{controller=Movies}/{action=GetMovie}/{id?}"
+            );
 
             #endregion
-
-
 
             app.Run();
         }
