@@ -18,16 +18,13 @@ namespace Session2_MVC
             app.UseRouting();
             app.UseStaticFiles();
 
-            // Corrected Default Route
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"
+            app.MapControllerRoute( "default",
+                "{controller=Home}/{action=Index}/{id?}"
             );
 
-            // Corrected Custom Route
             app.MapControllerRoute(
-                name: "omarRoute",
-                pattern: "{controller=Movies}/{action=GetMovie}/{id?}"
+                "omarRoute",
+                "{controller=Movies}/{action=GetMovie}/{id?}"
             );
 
             #endregion
