@@ -14,34 +14,14 @@ namespace Session2_MVC
 
             #region Routing
             app.UseRouting();
-
-            app.MapGet("/", async context =>
+            app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync("Hello World");
+                Console.WriteLine($"Request: {context.Request.Path}");
+                await next();
             });
-            app.MapGet("/test", async context => //static segment
-            {
-                await context.Response.WriteAsync("Hello omar");
-            });
-            app.MapGet("/{name}", async context => //variable segment
-            {
-                var name = context.GetRouteValue("name");
-                await context.Response.WriteAsync($"Hello {name}");
-            });
-
-            app.MapGet("/Fixed{name}", async context => //mixed segment
-            {
-                var name = context.Request.RouteValues["name"]; //==var name = context.GetRouteValue("name");
-                await context.Response.WriteAsync($"Hello fixed {name}");
-            });
-
-            app.MapGet("/Movie/GetMovie", async context =>
-            {
-                await context.Response.WriteAsync("Hello GetMovie!");
-            });
-
+            app.UseStaticFiles();
             app.MapControllerRoute("default",
-                "{controller}/{action}/{id?}"
+                "{controller = Home}/{action = Index}/{id?}"
                 //defaults: new { Controller = "Movies", Action = "Index" }
                 );
 
